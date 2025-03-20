@@ -1,0 +1,11 @@
+# Terraform files
+.terraform/
+*.tfstate
+*.tfstate.*
+terraform.lock.hcl
+
+# Ignore .terraform and state files inside backend/
+backend/.terraform/
+backend/*.tfstate
+backend/*.tfstate.*
+backend/.terraform.lock.hcl

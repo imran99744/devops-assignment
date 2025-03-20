@@ -52,7 +52,7 @@ While running `terraform apply`, I encountered an error related to the RDS insta
 
 **Resolution:**
 
-To address this, I modified the `vpc` module to create two private subnets spanning different Availability Zones within the region. I then updated the `rds` module to reference these two private subnets, ensuring the RDS instance was deployed across both Availability Zones as required.
+To address this, I created two private subnets spanning different Availability Zones within the region. I then updated the RDS configuration to reference these two private subnets, ensuring the RDS instance was deployed across both Availability Zones as required.
 
 This experience reinforced the importance of understanding AWS service best practices and how Terraform enforces them, particularly for services like RDS that prioritize high availability.
 

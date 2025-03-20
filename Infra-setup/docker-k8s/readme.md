@@ -52,3 +52,61 @@ The application is a basic Node.js server that listens on port 3000 and returns 
     ```
 5.  **Create a Load Balancer (Optional):**
     - If you want to expose the application externally, create a LoadBalancer service.
+
+
+## Troubleshooting OOMKilled Errors in Kubernetes
+
+**In my current organization, I directly experienced pods crashing with `OOMKilled` errors, significantly impacting application availability.** This required immediate troubleshooting. I quickly identified insufficient memory allocation as the root cause. **By promptly increasing the pod memory limits, I stabilized the application and prevented further disruptions.**
+
+This hands-on experience underscored the importance of a structured approach to diagnosing and resolving `OOMKilled` issues. Here’s the process I followed:
+
+### Diagnostic Steps
+
+1.  **Rapidly Checked Pod Events:**
+    * Used `kubectl describe pod <pod-name>` to confirm `OOMKilled` events and pinpoint the affected pods.
+
+    ```bash
+    kubectl describe pod <pod-name>
+    ```
+
+2.  **Analyzed Recent Pod Logs:**
+    * Quickly reviewed `kubectl logs <pod-name>` to look for any immediate patterns or clues indicating memory spikes.
+
+    ```bash
+    kubectl logs <pod-name>
+    ```
+
+3.  **Immediately Verified Resource Limits and Requests:**
+    * Checked the pod's deployment YAML to confirm the memory limits were inadequate.
+
+    ```yaml
+    resources:
+      limits:
+        memory: "512Mi" # Example (Original)
+      requests:
+        memory: "256Mi" # Example (Original)
+    ```
+
+4.  **Used `kubectl top` for Quick Memory Snapshot:**
+    * Employed `kubectl top pod <pod-name>` to get a real-time view of memory usage and confirm the memory exhaustion.
+
+    ```bash
+    kubectl top pod <pod-name>
+    ```
+
+### Root Cause Analysis (RCA)
+
+1.  **Identified the Trigger (Recent Traffic Surge):**
+    * Determined that a recent traffic surge was the likely trigger for the increased memory consumption.
+
+2.  **Analyzed Memory Usage Patterns (Observed Spikes):**
+    * Noted consistent memory spikes leading to the `OOMKilled` events.
+
+3.  **Reviewed Recent Code Changes (None Found):**
+    * Quickly ruled out recent code changes as a factor.
+
+4.  **Implemented Resource Adjustment (Increased Memory Limits):**
+    * Immediately increased the pod's memory limits to resolve the issue.
+
+5.  **Documented Findings and Actions (Sent to Senior):**
+    * Documented the investigation, root cause, and the implemented solution, and shared it with my senior for review and approval.

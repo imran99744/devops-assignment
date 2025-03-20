@@ -33,7 +33,9 @@ The application is a basic Node.js server that listens on port 3000 and returns 
     kubectl port-forward deployment/node-app-deployment 3000:3000
     ```
 5.  **Access the Application:**
-    - Open my web browser and navigated to `https://67dbb4774e828cad9173d17b-cd4c7e.node-c9a5.iximiuz.com/`. it will valid for 1 hour only.
+    - Opened my web browser and accessed the app in this url `https://67dbb4774e828cad9173d17b-cd4c7e.node-c9a5.iximiuz.com/`. it will be valid for 1 hour only. As of now this url is expeired. 
+
+# Also added screen shots regarding this implementation. please check on inside `k8s-manifest/` directory. 
 
 ### 2. Let's say we will deploy it to AWS EKS
 
